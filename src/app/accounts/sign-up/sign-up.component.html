@@ -1,0 +1,178 @@
+<div class="flex h-screen flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <img
+      class="mx-auto h-12 w-auto"
+      src="/assets/oselar_black.png "
+      alt="Your Company"
+      width="12"
+      height="20"
+    />
+    <h1
+      class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+    >
+      Sign Up for Oselar
+    </h1>
+    <p class="text-zinc-500 mt-5 text-center">
+      Connecting with local business made easy
+    </p>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
+    @if (signError) {
+    <div
+      class="p-4 mb-4 text-sm text-red-600 rounded-lg bg-red-100"
+      role="alert"
+    >
+      {{ signError }}
+    </div>
+    }
+    <form class="space-y-6" [formGroup]="signupForm" (ngSubmit)="signup()">
+      <div class="mb-5 grid grid-cols-2 gap-4">
+        <div>
+          <label
+            for="firstName"
+            class="block mb-2 text-sm font-medium text-zinc-900 ng-invalid"
+            >Your First Name</label
+          >
+          <input
+            type="text"
+            pInputText
+            id="firstName"
+            formControlName="firstName"
+            class="block w-full p-2.5 bg-zinc-50"
+          />
+          @if (firstName?.invalid && (firstName?.dirty || firstName?.touched)) {
+          <p id="helper-text-explanation" class="mt-2 text-sm text-red-500">
+            @if (firstName?.hasError('minlength')) {
+            <span>{{
+              "First Name too short please keep it above 3 characters"
+            }}</span>
+            } @else if (firstName?.hasError('required')) {
+            <span>First name Can't be Empty</span>
+            } @else if (firstName?.hasError('maxlength')) {
+            <span>First name is too long keep it less than 100 characters</span>
+
+            }
+          </p>
+          }
+        </div>
+        <div>
+          <label
+            for="lastName"
+            class="block mb-2 text-sm font-medium text-zinc-900 ng-invalid"
+            >Your Last Name</label
+          >
+          <input
+            type="text"
+            pInputText
+            id="lastName"
+            formControlName="lastName"
+            class="block w-full p-2.5 bg-zinc-50"
+          />
+          @if (lastName?.invalid && (lastName?.dirty || lastName?.touched)) {
+          <p id="helper-text-explanation" class="mt-2 text-sm text-red-500">
+            @if (lastName?.hasError('minlength')) {
+            <span>{{
+              "Last Name too short please keep it above 3 characters"
+            }}</span>
+            } @else if (lastName?.hasError('required')) {
+            <span>Last name Can't be Empty</span>
+            } @else if (lastName?.hasError('maxlength')) {
+            <span>Last name is too long keep it less than 100 characters</span>
+
+            }
+          </p>
+          }
+        </div>
+      </div>
+      <div class="mb-5">
+        <label
+          for="email"
+          class="block mb-2 text-sm font-medium text-zinc-900 ng-invalid"
+          >Your email</label
+        >
+        <input
+          type="email"
+          pInputText
+          id="email"
+          formControlName="email"
+          class="block w-full p-2.5 bg-zinc-50"
+        />
+        @if (email?.invalid && (email?.dirty || email?.touched)) {
+        <p id="helper-text-explanation" class="mt-2 text-sm text-red-500">
+          @if (email?.hasError('email')) {
+          <span>{{ "Email is invalid use example: name@example.com" }}</span>
+          } @else if (email?.hasError('required')) {
+          <span>Email Can't be Empty</span>
+          }
+        </p>
+        }
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label
+            for="password"
+            class="block text-sm font-medium leading-6 text-gray-900"
+            >Password</label
+          >
+        </div>
+        <div class="mt-2">
+          <p-password
+            type="password"
+            id="password"
+            formControlName="password"
+            autocomplete="new-password"
+            placeholder="8 characters minimum"
+            [feedback]="true"
+            [toggleMask]="true"
+          >
+            <ng-template pTemplate="header">
+              <h6 class="font-bold">Pick a password</h6>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <!-- <p-divider /> -->
+              <p class="mt-2">Suggestions</p>
+              <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
+              </ul>
+            </ng-template>
+          </p-password>
+          @if (password?.invalid && (password?.dirty || password?.touched)) {
+          <p id="helper-text-explanation" class="mt-2 text-sm text-red-500">
+            @if (password?.hasError('required')) {
+            <span>Password Can't be Empty</span>
+            } @else if(password?.hasError('minlength')) {
+            <span>Password is too short keep it above 8 characters</span>
+            } @else if(password?.hasError('maxlength')) {
+            <span>Password is too long keep it less than 100 characters</span>
+            }
+          </p>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button
+          pButton
+          pRipple
+          label="Sign Up"
+          [disabled]="signupForm.invalid"
+          class="bg-osaccent border-osaccent w-full"
+        ></button>
+      </div>
+    </form>
+
+    <p class="mt-10 text-center text-sm text-gray-500">
+      Already on oselar?
+      <a
+        routerLink="/login"
+        class="font-semibold leading-6 text-osaccent hover:text-orange-600"
+        >Login</a
+      >
+    </p>
+  </div>
+</div>

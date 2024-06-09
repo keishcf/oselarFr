@@ -1,0 +1,48 @@
+<div class="flex h-screen flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <img
+      class="mx-auto h-12 w-auto"
+      src="/assets/oselar_black.png "
+      alt="Your Company"
+      width="12"
+      height="20"
+    />
+  </div>
+  <div
+    class="mt-10 sm:mx-auto sm:w-full sm:max-w-2xl flex bg-zinc-50 flex-col items-center px-5 py-10 rounded-md shadow-sm border border-zinc-100"
+  >
+    <img
+      [src]="
+        verifyMessage != 'Success'
+          ? '/assets/error.svg'
+          : '/assets/email-verified.svg'
+      "
+      alt="oselar_confirmed"
+      class="h-28 w-28"
+    />
+    <h1
+      class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+    >
+      @switch (verifyMessage) {@case ('Success') { Congratulations! Your Email
+      is Verified 🎉 } @case ('Nerror') { Connectivity Issue } @case ('Vfailed')
+      { Oops! Email Verification Failed } @case ('Uknown') { Unknown Issue } }
+    </h1>
+    <p class="text-zinc-500 mt-5 text-center">
+      @switch (verifyMessage) {@case ('Success') { ou're all set! Your email has
+      been successfully verified. Now, you're officially part of our community.
+      Your can <a routerLink="/login" class="text-osaccent">Login</a> now. Let
+      the journey begin!} @case ('Nerror') { Looks like Your are not connected
+      to internet please try again later, If you're still experiencing issues,
+      reach out to our support team for assistance. We're here to help you get
+      onboarded smoothly! } @case ('Vfailed') { Uh-oh! It seems we couldn't
+      verify your email address. Don't worry, let's try that again. Please
+      double-check the email you provided and ensure it's correct. If you're
+      still experiencing issues, reach out to our support team for assistance.
+      We're here to help you get onboarded smoothly! } @case ('Uknown') {
+      Uh-Nooo! It seems we there is an issue on our side. Don't worry, Try that
+      again in a few minutes. If you're still experiencing issues, reach out to
+      our support team for assistance. We're here to help you get onboarded
+      smoothly! } }
+    </p>
+  </div>
+</div>

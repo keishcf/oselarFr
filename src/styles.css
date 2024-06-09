@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@layer tailwind-base, primeng, tailwind-utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import "primeng/resources/themes/aura-light-noir/theme.css";
+@import "primeng/resources/primeng.css";
+
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+body {
+  @apply scale-90;
+  font-family: "Inter", sans-serif;
+}
+
+.p-password-input {
+  @apply w-full p-2.5 bg-zinc-50
+}
+.p-password {
+  @apply block w-full
+}
