@@ -39,7 +39,7 @@
             pInputText
             id="firstName"
             formControlName="firstName"
-            class="block w-full p-2.5 bg-zinc-50"
+            class="block w-full p-3.5 bg-zinc- border-zinc-200 shadow-none bg-zinc-100"
           />
           @if (firstName?.invalid && (firstName?.dirty || firstName?.touched)) {
           <p id="helper-text-explanation" class="mt-2 text-sm text-red-500">
@@ -67,7 +67,7 @@
             pInputText
             id="lastName"
             formControlName="lastName"
-            class="block w-full p-2.5 bg-zinc-50"
+            class="block w-full p-3.5 bg-zinc- border-zinc-200 shadow-none bg-zinc-100"
           />
           @if (lastName?.invalid && (lastName?.dirty || lastName?.touched)) {
           <p id="helper-text-explanation" class="mt-2 text-sm text-red-500">
@@ -96,7 +96,7 @@
           pInputText
           id="email"
           formControlName="email"
-          class="block w-full p-2.5 bg-zinc-50"
+          class="block w-full p-3.5 bg-zinc- border-zinc-200 shadow-none bg-zinc-100"
         />
         @if (email?.invalid && (email?.dirty || email?.touched)) {
         <p id="helper-text-explanation" class="mt-2 text-sm text-red-500">
@@ -161,7 +161,7 @@
           pRipple
           label="Sign Up"
           [disabled]="signupForm.invalid"
-          class="bg-osaccent border-osaccent w-full"
+          class="bg-osaccent border-osaccent w-full p-3"
         ></button>
       </div>
     </form>

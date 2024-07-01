@@ -1,0 +1,68 @@
+<section class="flex flex-col gap-5">
+  <h2
+    class="text-2xl text-zinc-900 font-bold capitalize sm:truncate sm:tracking-tigh"
+  >
+    Reviews
+  </h2>
+  @if (!reviewsLoading()) { @for (review of userReviews; track $index) {
+
+  <app-user-review [review]="review"></app-user-review>
+  } } @else {
+  <!-- Reviews Skeleton -->
+  <div
+    *ngFor="let item of [1, 2, 3]"
+    class="rounded border bg-white border-zinc-50 p-10 flex flex-col gap-4"
+  >
+    <header class="flex flex-col gap-4">
+      <div class="flex justify-between items-start gap-2">
+        <div class="flex justify-between gap-3">
+          <p-skeleton size="3rem" />
+          <div>
+            <p-skeleton width="10rem" styleClass="mb-2" />
+            <p-skeleton width="6rem" styleClass="mb-2" />
+          </div>
+        </div>
+        <div>
+          <p-skeleton width="2rem" height="0.5rem" styleClass="mb-2" />
+        </div>
+      </div>
+
+      <!-- Rating Section -->
+      <div class="flex gap-2 items-center">
+        @for (rating of [1,2,3,4,5]; track $index) {
+        <p-skeleton shape="circle" size="1.5rem" styleClass="mb-2" />
+        }
+        <p-skeleton width="6rem" styleClass="mb-2" />
+      </div>
+    </header>
+    <p-skeleton width="100%" styleClass="mb-2" />
+    <p-skeleton width="94%" styleClass="mb-2" />
+    <p-skeleton width="97%" styleClass="mb-2" />
+    <p-skeleton width="12rem" styleClass="mb-2" />
+
+    <div class="flex gap-10">
+      <div class="text-center flex gap-2 items-start justify-start max-h-12">
+        <p-skeleton shape="circle" size="2.5rem" styleClass="mb-2" />
+
+        <div class="flex flex-col items-start justify-start">
+          <p-skeleton width="8rem" styleClass="mb-2" />
+
+          <p-skeleton width="2rem" styleClass="mb-2" />
+        </div>
+      </div>
+      <div class="text-center flex gap-2 items-start justify-start max-h-12">
+        <p-skeleton shape="circle" size="2.5rem" styleClass="mb-2" />
+
+        <div class="flex flex-col items-start justify-start">
+          <p-skeleton width="8rem" styleClass="mb-2" />
+
+          <p-skeleton width="2rem" styleClass="mb-2" />
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</section>
+<div>
+  <div class="card flex justify-content-center"></div>
+</div>

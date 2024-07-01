@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, CanActivateChildFn, Router } from '@angular/router';
 import { AccountsService } from '../accounts.service';
 
 export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
@@ -7,7 +7,7 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
 
 
-  if (accountServices.getAuthToken() != null) {
+  if (accountServices.isAuthenticated()) {
     return true
   } else {
     router.navigate(['/login'])
@@ -19,10 +19,22 @@ export const isAnonymousGuard: CanActivateFn = (route, state) => {
 
   const accountServices = inject(AccountsService)
   const router = inject(Router)
-  if (!accountServices.getAuthToken()) {
+  if (!accountServices.isAuthenticated()) {
     return true
   } else {
-    router.navigate(['/dashboard'])
+    router.navigate(['/profile'])
+    return false;
+  }
+};
+
+export const isAnonymousChildGuard: CanActivateChildFn = (childRoute, state) => {
+
+  const accountServices = inject(AccountsService)
+  const router = inject(Router)
+  if (!accountServices.isAuthenticated()) {
+    return true
+  } else {
+    router.navigate(['/profile'])
     return false;
   }
 };

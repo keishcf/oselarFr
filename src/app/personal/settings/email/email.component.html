@@ -1,0 +1,57 @@
+<form [formGroup]="emailForm" (ngSubmit)="updateEmail()">
+  <div class="flex sm:grid sm:grid-cols-7 gap-5">
+    <div class="sm:col-span-5">
+      <div class="flex justify-between">
+        <h3 class="text-xl sm:text-2xl font-bold text-zinc-900">
+          Set your password
+        </h3>
+        <button
+          routerLink="/profile"
+          type="button"
+          class="text-zinc-900 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 focus:ring-4 focus:outline-none focus:ring-zinc-100 font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center me-2 mb-2"
+        >
+          View Profile
+        </button>
+      </div>
+      <hr class="h-5 mt-8 w-full" />
+      <p-messages
+        [(value)]="messages"
+        [showTransitionOptions]="'500ms'"
+        [hideTransitionOptions]="'500ms'"
+        [enableService]="false"
+      />
+      <div class="">
+        <div>
+          <div class="flex flex-col gap-3">
+            <label
+              for="email"
+              class="block text-base font-bold text-zinc-900 ng-invalid"
+              >Email</label
+            >
+            <p id="helper-text-explanation" class="text-sm text-zinc-500">
+              Enter the new email you would like to use and We will send a
+              verification email to your new email address
+            </p>
+            <input
+              type="email"
+              pInputText
+              id="email"
+              formControlName="email"
+              class="block w-full p-3 border-zinc-200 shadow-none bg-zinc-100"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden sm:block sm:col-span-2"></div>
+  </div>
+  <div>
+    <button
+      pButton
+      pRipple
+      label="Change Email"
+      [disabled]="emailForm.invalid"
+      class="bg-zinc-900 border-zinc-800 w-40 p-3 mt-5"
+    ></button>
+  </div>
+</form>

@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 @import "primeng/resources/themes/aura-light-noir/theme.css";
 @import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
 
 
 @layer tailwind-base {
@@ -14,13 +15,99 @@
 }
 
 body {
-  @apply scale-90;
+  @apply text-sm selection:bg-zinc-900 selection:text-white bg-zinc-50;
   font-family: "Inter", sans-serif;
+
 }
 
+.p-dialog-mask {
+  @apply backdrop-blur-md;
+}
 .p-password-input {
-  @apply w-full p-2.5 bg-zinc-50
+  @apply block w-full p-3.5 border-zinc-200 shadow-none bg-zinc-100 placeholder:text-zinc-400
 }
 .p-password {
   @apply block w-full
+}
+
+p-inputMask input {
+  @apply bg-zinc-100 border-zinc-200 p-3.5 placeholder:text-zinc-400 w-full mt-3
+}
+
+p-dropdown .p-dropdown {
+  @apply bg-zinc-100 border-zinc-200 p-1.5 placeholder:text-zinc-400 w-full
+}
+
+.p-message {
+  @apply p-4 mb-4 rounded-lg shadow-none
+}
+.p-messages {
+  @apply text-sm
+}
+.p-message-success {
+  @apply bg-green-50 border-none
+}
+.p-message-info {
+  @apply bg-blue-50 border-none
+}
+.p-message-error {
+  @apply bg-red-50 border-none
+}
+.p-message-warn {
+  @apply bg-yellow-50 border-none
+}
+.p-message-secondary {
+  @apply bg-zinc-100 border-none
+}
+.p-message-contrast {
+  @apply bg-zinc-900 border-none
+}
+
+
+/* success  */
+.p-message-success .p-message-detail{
+  @apply text-green-800
+}
+.p-message-success .p-message-icon  {
+  @apply text-green-800
+}
+.p-message-success .p-message-close  {
+  @apply text-green-800
+}
+
+/* info  */
+.p-message-info .p-message-detail{
+  @apply text-blue-800
+}
+.p-message-info .p-message-icon  {
+  @apply text-blue-800
+}
+.p-message-info .p-message-close  {
+  @apply text-blue-800
+}
+
+/* error  */
+.p-message-error .p-message-detail{
+  @apply text-red-800
+}
+.p-message-error .p-message-icon  {
+  @apply text-red-800
+}
+.p-message-error .p-message-close  {
+  @apply text-red-800
+}
+
+/* warn  */
+.p-message-warn .p-message-detail{
+  @apply text-yellow-800
+}
+.p-message-warn .p-message-icon  {
+  @apply text-yellow-800
+}
+.p-message-warn .p-message-close  {
+  @apply text-yellow-800
+}
+
+.profile-image {
+  @apply w-32 h-32
 }

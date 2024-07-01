@@ -17,15 +17,8 @@ export class AppComponent implements OnInit {
   userisAu: boolean = false
 
   ngOnInit(): void {
-    if (this.accountsServices.getAuthToken() != null) {
-      this.getUser$ = this.accountsServices.getLoggedInUser().subscribe({
-        next: (user) => {
-          this.accountsServices.userIsAuthenticated.set(true)
-          console.log("juin", this.accountsServices.userIsAuthenticated())
-
-          this.accountsServices.setCurrentUser(user)
-        },
-      })
+    if (this.accountsServices.isAuthenticated()) {
+      this.getUser$ = this.accountsServices.getLoggedInUser().subscribe()
     }
   }
 }

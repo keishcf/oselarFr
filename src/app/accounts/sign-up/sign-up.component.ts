@@ -43,7 +43,6 @@ export class SignUpComponent {
   }
 
   signup() {
-    console.log(this.accountService.userIsAuthenticated())
     let data = {
       email: this.signupForm.value.email,
       first_name: this.signupForm.value.firstName,

@@ -15,24 +15,47 @@ export class AccountsService {
 
   private currentUserSubject!: BehaviorSubject<CurrentUser>
   public currentUser!: Observable<CurrentUser>
-  userIsAuthenticated = signal(false)
 
   constructor(private http:HttpClient) {
     this.currentUserSubject = new BehaviorSubject<any>(null);
     this.currentUser = this.currentUserSubject.asObservable();
+    // if (this.isAuthenticated()) {
+    //   this.getLoggedInUser()
+    // }
+  }
+
+  isAuthenticated(): boolean {
+    // Check if the user is authenticated
+    return !!localStorage.getItem('token');
   }
 
   login( credentials: unknown) {
-    return this.http.post(`${this.apiUrl}accounts/login/`,  credentials)
+    return this.http.post(`${this.apiUrl}accounts/login/`,  credentials).pipe(tap((response: any) => {
+      if (response.token) {
+        this.setToken(response.token)
+        this.getLoggedInUser().subscribe()
+      }
+    }))
   }
 
   logout() {
-    this.removeAuthToken()
-    return this.http.get(`${this.apiUrl}accounts/logout/`)
+
+    return this.http.get(`${this.apiUrl}accounts/logout/`).pipe(tap(() => {
+      this.removeAuthToken()
+      this.setCurrentUser(null)
+    }))
   }
 
   signup(credentials:unknown) {
     return this.http.post(`${this.apiUrl}accounts/signup/`, credentials)
+  }
+
+  getUserProfile(id?: string) {
+    var profileUrl = `${this.apiUrl}accounts/pa/profile`
+    if (id) {
+      profileUrl = `${this.apiUrl}accounts/pa/profile/${id}`
+    }
+    return this.http.get(profileUrl)
   }
 
   VerifyEmail(code: any) {
@@ -40,7 +63,9 @@ export class AccountsService {
   }
 
   getLoggedInUser() {
-    return this.http.get(`${this.apiUrl}accounts/users/me`)
+    return this.http.get(`${this.apiUrl}accounts/users/me`).pipe(tap((user: any) => {
+      this.setCurrentUser(user)
+    }))
   }
 
   public getCurrentUser(): Observable<any> {
@@ -52,11 +77,8 @@ export class AccountsService {
   }
 
 
-
   setToken(code: string) {
-    localStorage.setItem("token", code)
-    this.userIsAuthenticated.set(true)
-  }
+    localStorage.setItem("token", code)  }
 
   getAuthToken() {
     if (typeof localStorage !== 'undefined') {
@@ -68,9 +90,29 @@ export class AccountsService {
   }
 
   removeAuthToken() {
-    this.userIsAuthenticated.set(false)
     localStorage.removeItem("token")
   }
+
+
+  updateUserProfile(data: any) {
+    return this.http.patch(`${this.apiUrl}accounts/pa/profile/change_profile/`, data)
+  }
+
+  updateAccount(data: any) {
+    return this.http.post(`${this.apiUrl}accounts/users/me`, data)
+  }
+
+  updateAccountPassword(data: any) {
+    return this.http.post(`${this.apiUrl}accounts/password/change/`, data)
+  }
+
+  updateAccountEmail(data: any) {
+    return this.http.post(`${this.apiUrl}accounts/email/change/`, data)
+  }
+  updateAccountEmailVerify(code: string) {
+    return this.http.get(`${this.apiUrl}accounts/email/change/verify/?code=${code}`,)
+  }
+
 
 
 }

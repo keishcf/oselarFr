@@ -1,0 +1,251 @@
+<form
+  [formGroup]="ProfileUpdateForm"
+  (ngSubmit)="updateProfile()"
+  enctype="multipart/form-data"
+>
+  <div class="sm:grid sm:grid-cols-7 gap-5 mb-10">
+    <div class="sm:col-span-5">
+      <div class="flex justify-between items-baseline">
+        <h2
+          class="sm:text-2xl text-lg text-zinc-900 font-bold capitalize sm:truncate sm:tracking-tigh"
+        >
+          Profile Settings
+        </h2>
+        <button
+          routerLink="/profile"
+          type="button"
+          class="text-zinc-900 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 focus:ring-4 focus:outline-none focus:ring-zinc-100 font-medium rounded-lg text-sm p-2 sm:px-5 sm:py-2 text-center inline-flex items-center me-2 mb-2"
+        >
+          View Profile
+        </button>
+      </div>
+      <hr class="h-5 mt-4 w-full" />
+      <p-messages
+        class=""
+        [showTransitionOptions]="'500ms'"
+        [hideTransitionOptions]="'500ms'"
+      />
+      <div class="space-y-6">
+        <div class="sm:hidden block">
+          <!-- Profile PIc setting -->
+          <div class="flex flex-col items-center space-x-6">
+            <label
+              for="email"
+              class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+              >Current Profile Picture</label
+            >
+            <div class="shrink-0">
+              <img
+                [src]="loggedInUser.profile_picture"
+                id="preview_img"
+                class="h-32 w-32 object-cover rounded-full mb-5"
+                alt="Current profile photo"
+              />
+            </div>
+            <input
+              type="file"
+              name="profile_picture"
+              accept="images/*"
+              id="profile_picture"
+              (change)="onFileSelect($event)"
+              class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-non file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="mt-2 flex gap-10">
+            <!-- First Name Field -->
+            <div class="w-full">
+              <label
+                for="email"
+                class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+                >First Name</label
+              >
+              <p
+                id="helper-text-explanation"
+                class="mt-2 text-sm text-zinc-500"
+              >
+                This field is required. The name that will show on your profile.
+              </p>
+              <input
+                type="text"
+                pInputText
+                formControlName="first_name"
+                class="block w-full p-3 bg-zinc- border-zinc-200 shadow-none bg-zinc-100 mt-3"
+              />
+            </div>
+
+            <!-- Last Name Field -->
+            <div class="w-full">
+              <label
+                for="email"
+                class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+                >Last Name</label
+              >
+              <p
+                id="helper-text-explanation"
+                class="mt-2 text-sm text-zinc-500"
+              >
+                This field is required. Only your last initial will show on your
+                profile.
+              </p>
+              <input
+                type="text"
+                pInputText
+                formControlName="last_name"
+                class="block w-full p-3 bg-zinc- border-zinc-200 shadow-none bg-zinc-100 mt-3"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Bio Field -->
+        <div>
+          <label
+            for="bio"
+            class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+            >Bio</label
+          >
+          <p id="helper-text-explanation" class="mt-2 text-sm text-zinc-500">
+            A short description about yourself to help other know you better
+          </p>
+          <textarea
+            id="bio"
+            rows="8"
+            pInputTextarea
+            formControlName="bio"
+            maxlength="200"
+            class="bg-zinc-100 w-full mt-3 text-justify value"
+          >
+          </textarea>
+        </div>
+        <!-- Phone -->
+        <div class="mt-5">
+          <label
+            for="email"
+            class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+            >Phone</label
+          >
+          <p id="helper-text-explanation" class="mt-2 text-sm text-zinc-500">
+            Add or edit your phone number. We’ll automatically enter it when you
+            request a quote, make a reservation or make other transactions on
+            oselar.
+          </p>
+          <p-inputMask
+            mask="(+999) 999 999 999"
+            formControlName="phone"
+            placeholder="(+000) 000 000 000"
+            class=""
+          />
+        </div>
+
+        <!-- HomeTown -->
+        <div class="mt-5">
+          <label
+            for="email"
+            class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+            >HomeTown</label
+          >
+          <p id="helper-text-explanation" class="mt-2 text-sm text-zinc-500">
+            Kabalagala, Kampala
+          </p>
+          <input
+            type="text"
+            pInputText
+            formControlName="hometown"
+            class="block w-full p-3 bg-zinc- border-zinc-200 shadow-none bg-zinc-100 mt-3"
+          />
+        </div>
+
+        <!-- Primary Language and Country Field -->
+        <div class="mt-2 flex gap-10">
+          <!-- Primary Language Field -->
+          <div class="w-full">
+            <label
+              for="email"
+              class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+              >Primary Language</label
+            >
+            <input
+              type="text"
+              pInputText
+              formControlName="primary_language"
+              class="block w-full p-3 bg-zinc- border-zinc-200 shadow-none bg-zinc-100 mt-3"
+            />
+          </div>
+
+          <!-- Country Field -->
+          <div class="w-full">
+            <label
+              for="email"
+              class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+              >Country</label
+            >
+            <p-dropdown
+              formControlName="country"
+              [options]="countries"
+              [checkmark]="true"
+              optionLabel="name"
+              optionValue="code"
+              [showClear]="true"
+              placeholder="Select Your Country"
+            />
+          </div>
+        </div>
+        <!-- Web Url -->
+        <div class="mt-5">
+          <label
+            for="email"
+            class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+            >Website Url</label
+          >
+          <p id="helper-text-explanation" class="mt-2 text-sm text-zinc-500">
+            If you have a website, enter the URL here. It can be like a your own
+            business
+          </p>
+          <input
+            type="url"
+            pInputText
+            formControlName="web_url"
+            placeholder="Example: https://www.oselar.com"
+            class="block w-full p-3 bg-zinc- border-zinc-200 shadow-none bg-zinc-100 mt-3"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="sm:col-span-2 sm:block hidden">
+      <!-- Profile PIc setting -->
+      <div class="flex flex-col items-center space-x-6">
+        <label
+          for="email"
+          class="block mb-2 text-base font-bold text-zinc-900 ng-invalid"
+          >Current Profile Picture</label
+        >
+        <div class="shrink-0">
+          <img
+            [src]="loggedInUser.profile_picture"
+            id="preview_img"
+            class="h-32 w-32 object-cover rounded-full mb-5"
+            alt="Current profile photo"
+          />
+        </div>
+        <input
+          type="file"
+          name="profile_picture"
+          accept="images/*"
+          id="profile_picture"
+          (change)="onFileSelect($event)"
+          class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-non file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="py-4">
+    <button
+      pButton
+      pRipple
+      label="Update Profile"
+      class="bg-zinc-900 hover:bg-zinc-800 w-40 p-3"
+    ></button>
+  </div>
+</form>

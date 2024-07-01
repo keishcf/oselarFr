@@ -1,0 +1,28 @@
+.profile-header {
+    width: 100%;
+}
+@media (min-width: 640px) {
+    .profile-header {
+        max-width: 640px;
+    }
+}
+@media (min-width: 768px) {
+    .profile-header {
+        max-width: 768px;
+    }
+}
+@media (min-width: 1024px) {
+    .profile-header {
+        max-width: 1024px;
+    }
+}
+@media (min-width: 1280px) {
+    .profile-header {
+        max-width: 1280px;
+    }
+}
+@media (min-width: 1536px) {
+    .profile-header {
+        max-width: 1536px;
+    }
+}
