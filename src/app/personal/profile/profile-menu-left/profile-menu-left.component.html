@@ -2,7 +2,7 @@
   @for (menu of menus; track $index) {
   <a
     [routerLink]="menu.link"
-    routerLinkActive="bg-white border border-zinc-100 shadow-sm gap-x-4"
+    routerLinkActive="bg-white shadow gap-x-4"
     class="flex relative items-center rounded font-semibold leading-normal gap-x-2 text-zinc-900 py-2 px-6"
   >
     @if (menu.icon == 'overview') {
@@ -261,7 +261,7 @@
     @for (menu of menus; track $index) {
     <a
       [routerLink]="menu.link"
-      routerLinkActive="bg-white border border-zinc-100 shadow-sm gap-x-4"
+      routerLinkActive="bg-white shadow gap-x-4"
       class="flex relative items-center rounded font-semibold leading-normal gap-x-2 text-zinc-900 py-2 px-6"
     >
       @if (menu.icon == 'overview') {

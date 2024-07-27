@@ -9,7 +9,8 @@ import { Observable, tap } from 'rxjs';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  // providers: [AccountsService]
 })
 export class AppComponent implements OnInit {
   constructor(private accountsServices:AccountsService) {}

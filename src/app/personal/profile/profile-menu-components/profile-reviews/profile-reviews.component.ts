@@ -6,6 +6,7 @@ import { SkeletonModule } from 'primeng/skeleton'
 import { CommonModule } from '@angular/common';
 import { UserReviewComponent } from './user-review/user-review.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { ButtonModule } from 'primeng/button';
 
 interface PageEvent {
     first: number;
@@ -14,58 +15,72 @@ interface PageEvent {
     pageCount: number;
 }
 
+
 @Component({
   selector: 'app-profile-reviews',
   standalone: true,
-  imports: [UserReviewComponent, SkeletonModule, CommonModule, PaginatorModule],
+  imports: [UserReviewComponent, SkeletonModule, CommonModule, PaginatorModule,ButtonModule],
   templateUrl: './profile-reviews.component.html',
   styleUrl: './profile-reviews.component.css'
 })
 export class ProfileReviewsComponent implements OnInit {
-
-  @Input() userId!: string
   constructor(private personalServices: PersonalService, private accountServices:AccountsService) {}
 
-  first: number = 0;
+  @Input() userId!: string
 
-  rows: number = 10;
-
-
+  nextUrl: string | null = null;
+  previousUrl: string | null = null;
 
   reviewsLoading = signal(true)
 
   userReviews: any
   reviewsPaginationData: any
+  loadingMore = false
 
   ngOnInit(): void {
+    this.loadReviews()
+  }
+
+  loadReviews(url?: string) {
     if (!this.userId) {
-     this.accountServices.getLoggedInUser().pipe(switchMap(userData => this.personalServices.getUserReviews(userData.id))).subscribe({
+      this.accountServices.getLoggedInUser().pipe(switchMap(userData => this.personalServices.getUserReviews(userData.id, url))).subscribe({
         next: (reviews: any) => {
-          this.setUserReview(reviews.results)
+          this.setUserReview(reviews)
         },
       })
-    } else {
-      this.personalServices.getUserReviews(this.userId).subscribe({
+    }
+    if (this.userId) {
+      this.personalServices.getUserReviews(this.userId, url).subscribe({
         next: (reviews: any) => {
-          this.setUserReview(reviews.results)
+
+          this.setUserReview(reviews)
         },
       })
     }
   }
 
+  loadMore(): void {
+    this.loadingMore = true
+    if (this.nextUrl) {
+      this.personalServices.getUserReviews(this.userId, this.nextUrl)
+        .subscribe((reviews: any) => {
+          this.loadingMore = false
+          this.userReviews.push(...reviews.results); // append new results
+          this.nextUrl = reviews.next; // update the next URL for further pagination
+        });
+    }
+  }
+
+
   setUserReview(reviews: any) {
-    this.userReviews = reviews
+    this.nextUrl = reviews.next
+    this.previousUrl = reviews.previous
+    this.userReviews = reviews.results
+    this.reviewsLoading.set(false)
     this.reviewsPaginationData = {
       "count": reviews.count,
       "next": reviews.next,
       "previous": reviews.previous
     }
-    this.reviewsLoading.set(false)
-
-  }
-
-  onPageChange(event: any) {
-    this.first = event.first;
-    this.rows = event.rows;
   }
 }

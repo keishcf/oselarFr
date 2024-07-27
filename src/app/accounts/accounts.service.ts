@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { CurrentUser } from './accounts';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AccountsService {
   private currentUserSubject!: BehaviorSubject<CurrentUser>
   public currentUser!: Observable<CurrentUser>
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
     this.currentUserSubject = new BehaviorSubject<any>(null);
     this.currentUser = this.currentUserSubject.asObservable();
     // if (this.isAuthenticated()) {
@@ -81,6 +82,7 @@ export class AccountsService {
     localStorage.setItem("token", code)  }
 
   getAuthToken() {
+
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('token');
     } else {

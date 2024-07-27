@@ -1,0 +1,345 @@
+<section class="bg-white">
+  <div class="container mx-auto scale-90 py-6">
+    @if (BusinessData$ | async; as business) {
+    <div class="flex gap-2.5">
+      <!-- avatar -->
+      <div>
+        @if (business.profile.logo) {
+        <p-avatar
+          [image]="business.profile.logo"
+          styleClass="mr-2 business-profile-image"
+        />
+        } @else {
+        <p-avatar
+          [label]="business.profile.name.slice(0, 1)"
+          styleClass="mr-2 business-profile-image"
+        />
+        }
+      </div>
+
+      <!-- business anem and other information  -->
+      <div class="flex flex-col justify-center w-full gap-2">
+        <div class="flex justify-between items-center">
+          <h1
+            class="text-4xl text-zinc-900 capitalize font-bold flex gap-2 items-center"
+          >
+            {{ business.profile.name }}
+            @if (business.profile.is_verified) {
+            <span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                width="22"
+                height="22"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M9.5924 3.20027C9.34888 3.4078 9.22711 3.51158 9.09706 3.59874C8.79896 3.79854 8.46417 3.93721 8.1121 4.00672C7.95851 4.03705 7.79903 4.04977 7.48008 4.07522C6.6787 4.13918 6.278 4.17115 5.94371 4.28923C5.17051 4.56233 4.56233 5.17051 4.28923 5.94371C4.17115 6.278 4.13918 6.6787 4.07522 7.48008C4.04977 7.79903 4.03705 7.95851 4.00672 8.1121C3.93721 8.46417 3.79854 8.79896 3.59874 9.09706C3.51158 9.22711 3.40781 9.34887 3.20027 9.5924C2.67883 10.2043 2.4181 10.5102 2.26522 10.8301C1.91159 11.57 1.91159 12.43 2.26522 13.1699C2.41811 13.4898 2.67883 13.7957 3.20027 14.4076C3.40778 14.6511 3.51158 14.7729 3.59874 14.9029C3.79854 15.201 3.93721 15.5358 4.00672 15.8879C4.03705 16.0415 4.04977 16.201 4.07522 16.5199C4.13918 17.3213 4.17115 17.722 4.28923 18.0563C4.56233 18.8295 5.17051 19.4377 5.94371 19.7108C6.278 19.8288 6.6787 19.8608 7.48008 19.9248C7.79903 19.9502 7.95851 19.963 8.1121 19.9933C8.46417 20.0628 8.79896 20.2015 9.09706 20.4013C9.22711 20.4884 9.34887 20.5922 9.5924 20.7997C10.2043 21.3212 10.5102 21.5819 10.8301 21.7348C11.57 22.0884 12.43 22.0884 13.1699 21.7348C13.4898 21.5819 13.7957 21.3212 14.4076 20.7997C14.6511 20.5922 14.7729 20.4884 14.9029 20.4013C15.201 20.2015 15.5358 20.0628 15.8879 19.9933C16.0415 19.963 16.201 19.9502 16.5199 19.9248C17.3213 19.8608 17.722 19.8288 18.0563 19.7108C18.8295 19.4377 19.4377 18.8295 19.7108 18.0563C19.8288 17.722 19.8608 17.3213 19.9248 16.5199C19.9502 16.201 19.963 16.0415 19.9933 15.8879C20.0628 15.5358 20.2015 15.201 20.4013 14.9029C20.4884 14.7729 20.5922 14.6511 20.7997 14.4076C21.3212 13.7957 21.5819 13.4898 21.7348 13.1699C22.0884 12.43 22.0884 11.57 21.7348 10.8301C21.5819 10.5102 21.3212 10.2043 20.7997 9.5924C20.5922 9.34887 20.4884 9.22711 20.4013 9.09706C20.2015 8.79896 20.0628 8.46417 19.9933 8.1121C19.963 7.95851 19.9502 7.79903 19.9248 7.48008C19.8608 6.6787 19.8288 6.278 19.7108 5.94371C19.4377 5.17051 18.8295 4.56233 18.0563 4.28923C17.722 4.17115 17.3213 4.13918 16.5199 4.07522C16.201 4.04977 16.0415 4.03705 15.8879 4.00672C15.5358 3.93721 15.201 3.79854 14.9029 3.59874C14.7729 3.51158 14.6511 3.40781 14.4076 3.20027C13.7957 2.67883 13.4898 2.41811 13.1699 2.26522C12.43 1.91159 11.57 1.91159 10.8301 2.26522C10.5102 2.4181 10.2043 2.67883 9.5924 3.20027ZM16.3735 9.86314C16.6913 9.5453 16.6913 9.03 16.3735 8.71216C16.0557 8.39433 15.5403 8.39433 15.2225 8.71216L10.3723 13.5624L8.77746 11.9676C8.45963 11.6498 7.94432 11.6498 7.62649 11.9676C7.30866 12.2854 7.30866 12.8007 7.62649 13.1186L9.79678 15.2889C10.1146 15.6067 10.6299 15.6067 10.9478 15.2889L16.3735 9.86314Z"
+                    fill="#f97316"
+                  ></path>
+                </g>
+              </svg>
+            </span>
+            }
+          </h1>
+          <div class="flex justify-normal gap-x-5 divide-solid">
+            <!-- Write a review button -->
+            <button
+              type="button"
+              [routerLink]="['./review-business']"
+              class="text-zinc-900 font-semibold text-base text-center inline-flex justify-center gap-2 items-center hover:underline hover:underline-offset-4"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                width="22"
+                height="22"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M20.8477 1.87868C19.6761 0.707109 17.7766 0.707105 16.605 1.87868L2.44744 16.0363C2.02864 16.4551 1.74317 16.9885 1.62702 17.5692L1.03995 20.5046C0.760062 21.904 1.9939 23.1379 3.39334 22.858L6.32868 22.2709C6.90945 22.1548 7.44285 21.8693 7.86165 21.4505L22.0192 7.29289C23.1908 6.12132 23.1908 4.22183 22.0192 3.05025L20.8477 1.87868ZM18.0192 3.29289C18.4098 2.90237 19.0429 2.90237 19.4335 3.29289L20.605 4.46447C20.9956 4.85499 20.9956 5.48815 20.605 5.87868L17.9334 8.55027L15.3477 5.96448L18.0192 3.29289ZM13.9334 7.3787L3.86165 17.4505C3.72205 17.5901 3.6269 17.7679 3.58818 17.9615L3.00111 20.8968L5.93645 20.3097C6.13004 20.271 6.30784 20.1759 6.44744 20.0363L16.5192 9.96448L13.9334 7.3787Z"
+                    fill="#27272a"
+                  ></path>
+                </g>
+              </svg>
+              Write a review
+            </button>
+
+            <!-- Add to favorite button -->
+            <button
+              type="button"
+              (click)="addToFavorite(business.profile.id)"
+              class="text-zinc-900 font-semibold text-base text-center inline-flex justify-center gap-2 items-center hover:underline hover:underline-offset-4"
+            >
+              <!-- favorite off icon -->
+              <svg
+                *ngIf="!MarkedFavorite"
+                viewBox="0 0 24 24"
+                fill="none"
+                width="22"
+                height="22"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
+                    stroke="#27272a"
+                    stroke-width="2.376"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </g>
+              </svg>
+              <!-- favorite on icon -->
+              <svg
+                *ngIf="MarkedFavorite"
+                viewBox="0 0 24 24"
+                fill="none"
+                width="22"
+                height="22"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M4.45067 13.9082L11.4033 20.4395C11.6428 20.6644 11.7625 20.7769 11.9037 20.8046C11.9673 20.8171 12.0327 20.8171 12.0963 20.8046C12.2375 20.7769 12.3572 20.6644 12.5967 20.4395L19.5493 13.9082C21.5055 12.0706 21.743 9.0466 20.0978 6.92607L19.7885 6.52734C17.8203 3.99058 13.8696 4.41601 12.4867 7.31365C12.2913 7.72296 11.7087 7.72296 11.5133 7.31365C10.1304 4.41601 6.17972 3.99058 4.21154 6.52735L3.90219 6.92607C2.25695 9.0466 2.4945 12.0706 4.45067 13.9082Z"
+                    fill="#f97316"
+                    stroke="#f97316"
+                    stroke-width="2"
+                  ></path>
+                </g>
+              </svg>
+              {{ MarkedFavorite ? "Added" : "Add" }} to favorite
+            </button>
+
+            <!-- share button -->
+
+            <button
+              type="button"
+              class="text-zinc-900 font-semibold text-base text-center inline-flex justify-center gap-2 items-center hover:underline hover:underline-offset-4"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                width="22"
+                height="22"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g id="Communication / Share_iOS_Export">
+                    <path
+                      id="Vector"
+                      d="M9 6L12 3M12 3L15 6M12 3V13M7.00023 10C6.06835 10 5.60241 10 5.23486 10.1522C4.74481 10.3552 4.35523 10.7448 4.15224 11.2349C4 11.6024 4 12.0681 4 13V17.8C4 18.9201 4 19.4798 4.21799 19.9076C4.40973 20.2839 4.71547 20.5905 5.0918 20.7822C5.5192 21 6.07899 21 7.19691 21H16.8036C17.9215 21 18.4805 21 18.9079 20.7822C19.2842 20.5905 19.5905 20.2839 19.7822 19.9076C20 19.4802 20 18.921 20 17.8031V13C20 12.0681 19.9999 11.6024 19.8477 11.2349C19.6447 10.7448 19.2554 10.3552 18.7654 10.1522C18.3978 10 17.9319 10 17 10"
+                      stroke="#27272a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </g>
+                </g>
+              </svg>
+              Share
+            </button>
+          </div>
+        </div>
+
+        <!-- other information -->
+        <div class="flex gap-3 items-center justify-start">
+          <!-- reviews -->
+          <div class="flex items-center gap-3">
+            <p-rating
+              [(ngModel)]="business.stastics.weighted_average"
+              stars="5"
+              [readonly]="true"
+              cancel="false"
+            >
+              <ng-template pTemplate="onicon">
+                <svg
+                  viewBox="0 0 48 48"
+                  version="1"
+                  width="25"
+                  height="25"
+                  class="-mr-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  enable-background="new 0 0 48 48"
+                  fill="#000000"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <circle fill="#f97316" cx="24" cy="24" r="21"></circle>
+                    <polygon
+                      fill="#ffffff"
+                      points="24,11 27.9,18.9 36.6,20.2 30.3,26.3 31.8,35 24,30.9 16.2,35 17.7,26.3 11.4,20.2 20.1,18.9"
+                    ></polygon>
+                  </g>
+                </svg>
+              </ng-template>
+              <ng-template pTemplate="officon">
+                <svg
+                  viewBox="0 0 48 48"
+                  version="1"
+                  width="25"
+                  height="25"
+                  class="-mr-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  enable-background="new 0 0 48 48"
+                  fill="#000000"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <circle
+                      class="fill-zinc-200"
+                      cx="24"
+                      cy="24"
+                      r="21"
+                    ></circle>
+                    <polygon
+                      fill="#ffffff"
+                      points="24,11 27.9,18.9 36.6,20.2 30.3,26.3 31.8,35 24,30.9 16.2,35 17.7,26.3 11.4,20.2 20.1,18.9"
+                    ></polygon>
+                  </g>
+                </svg>
+              </ng-template>
+            </p-rating>
+            <div>
+              <span class="text-base text-zinc-800 font-semibold">
+                {{ business.stastics.review_count }} reviews</span
+              >
+            </div>
+          </div>
+          <!-- location -->
+          <div class="flex items-center gap-1">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              width="22"
+              height="22"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z"
+                  stroke="#52525b"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z"
+                  stroke="#52525b"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+            <span class="text-base text-zinc-600 font-normal">
+              {{ business.profile.address }}, {{ business.profile.state }},
+              {{ business.profile.city }}
+            </span>
+          </div>
+          <!-- website -->
+          <a
+            href="{{ business.profile.website }}"
+            target="_blank"
+            *ngIf="business.profile.website"
+            class="flex items-center gap-1 underline underline-offset-2"
+          >
+            <svg
+              viewBox="0 0 64 64"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke-width="3"
+              stroke="#000000"
+              width="22"
+              height="22"
+              fill="none"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"
+                ></path>
+                <path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path>
+                <path
+                  d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"
+                ></path>
+                <path
+                  d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"
+                ></path>
+                <line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line>
+                <line x1="32" y1="6.99" x2="32" y2="56.7"></line>
+                <line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line>
+                <line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line>
+                <path
+                  d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"
+                ></path>
+              </g>
+            </svg>
+            <span class="text-base text-zinc-600 font-normal">
+              {{ business.profile.website | url }}
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</section>

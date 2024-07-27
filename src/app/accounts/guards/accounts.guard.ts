@@ -39,3 +39,16 @@ export const isAnonymousChildGuard: CanActivateChildFn = (childRoute, state) => 
   }
 };
 
+export const isAuthenticatedChildGuard: CanActivateChildFn = (childRoute, state) => {
+  const accountServices = inject(AccountsService)
+  const router = inject(Router)
+
+
+  if (accountServices.isAuthenticated()) {
+    return true
+  } else {
+    router.navigate(['/login'])
+    return false;
+  }
+}
+

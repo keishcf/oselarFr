@@ -16,10 +16,14 @@ export class PersonalService {
     return this.http.get(`${this.apiUrl}accounts/pa/profile/${userId}/get_user_statistics`,)
   }
 
-  getUserReviews(userId: string) {
-    return this.http.get(`${this.apiUrl}accounts/pa/profile/${userId}/user_reviews`)
+  getUserReviews(userId: string, url?: string) {
+    const endpoint = url || `${this.apiUrl}accounts/pa/profile/${userId}/user_reviews/`
+    return this.http.get(endpoint)
   }
 
+  setUserReviewHelpful(reviewId: string) {
+    return this.http.post(`${this.apiUrl}business/review/${reviewId}/mark_helpful/`, "")
+  }
 
 }
 
